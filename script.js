@@ -119,7 +119,7 @@
     emailBtn.addEventListener("click", function () {
       var ok = /.+@.+\..+/.test(emailInput.value);
       emailNote.textContent = ok
-        ? "Got it. This form is a placeholder, wire it to your email tool or use the [email address] link."
+        ? "Thanks. The quickest way to reach me is directly at hello@coffeeandlaptopconsulting.com."
         : "Enter a valid email address first.";
       emailNote.style.display = "block";
     });
