@@ -10,8 +10,8 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-a { color: #B4632A; text-decoration: none; }
-a:hover { color: #94501E; }
+a { color: #1F5E58; text-decoration: none; }
+a:hover { color: #164742; }
 
 input[type=range]::-webkit-slider-thumb { cursor: pointer; }
 details summary::-webkit-details-marker { display: none; }
