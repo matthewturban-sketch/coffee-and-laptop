@@ -1,66 +1,31 @@
-:root {
-  --bg: #f5f0e8;
-  --ink: #2b2420;
-  --accent: #7a5c3e;
-  --accent-dark: #5c4530;
-}
+/* Coffee and Laptop — base styles */
 
-* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
 
 body {
   margin: 0;
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  color: var(--ink);
-  background: var(--bg);
-  line-height: 1.6;
+  background: #F4ECE0;
+  color: #33261D;
+  font-family: 'Barlow', sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
 
-.site-header {
-  text-align: center;
-  padding: 4rem 1rem 2rem;
-}
+a { color: #B4632A; text-decoration: none; }
+a:hover { color: #94501E; }
 
-.site-header h1 {
-  margin: 0;
-  font-size: 2.5rem;
-}
+input[type=range]::-webkit-slider-thumb { cursor: pointer; }
+details summary::-webkit-details-marker { display: none; }
 
-.tagline {
-  margin: 0.5rem 0 0;
-  color: var(--accent);
-  font-style: italic;
-}
+/* Interactive hover states (converted from the design's style-hover bindings) */
 
-main {
-  max-width: 42rem;
-  margin: 0 auto;
-  padding: 2rem 1rem;
-}
+/* Primary teal CTA buttons */
+.cta { transition: background 0.15s ease, color 0.15s ease; }
+.cta:hover { background: #164742; color: #FBF7F0; }
 
-.hero {
-  background: #fff;
-  border-radius: 12px;
-  padding: 2rem;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-}
+/* Ghost / outline button */
+.ghost { transition: background 0.15s ease, color 0.15s ease; }
+.ghost:hover { background: #1F5E58; color: #FBF7F0; }
 
-button {
-  margin-top: 1rem;
-  padding: 0.6rem 1.4rem;
-  font-size: 1rem;
-  color: #fff;
-  background: var(--accent);
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background 0.2s ease;
-}
-
-button:hover { background: var(--accent-dark); }
-
-.site-footer {
-  text-align: center;
-  padding: 2rem 1rem;
-  color: var(--accent);
-  font-size: 0.9rem;
-}
+/* Header "Book a call" outline button */
+.navbtn { transition: border-color 0.15s ease, color 0.15s ease; }
+.navbtn:hover { border-color: #1F5E58; color: #F4ECE0; }
