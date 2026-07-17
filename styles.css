@@ -1,5 +1,15 @@
 /* Coffee and Laptop — base styles */
 
+/*
+ * COLOR RULE — teal (#1F5E58) contrast
+ * Do NOT use teal as foreground (text, icons, outlines) on the brown/espresso
+ * backgrounds (#2A1E17, #362619, #211710) — it fails readability there.
+ * On brown, use cream (#F4ECE0) or white for foreground instead.
+ * Teal IS fine as: a button/block background, a slider accent-color, and as
+ * foreground on the cream/white surfaces (#F4ECE0, #FBF7F0).
+ * Apply this when importing future design updates.
+ */
+
 html { scroll-behavior: smooth; }
 
 body {
