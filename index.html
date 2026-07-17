@@ -205,10 +205,12 @@
       <div style="margin-top: 36px; display: flex; flex-direction: column; align-items: center; gap: 22px;">
         <a href="https://calendar.app.google/Nm9GsKLNqtNz1NJV8" target="_blank" rel="noopener" class="cta" style="display: inline-block; background: #1F5E58; color: #FBF7F0; font-family: 'Archivo', sans-serif; font-weight: 700; font-size: 18px; padding: 18px 36px;">Book a 20-minute call</a>
         <div style="font-size: 14px; color: #8A7561;">Prefer email? Use the fallback below.</div>
-        <div style="display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; width: 100%; max-width: 440px;">
-          <input id="in-email" type="email" placeholder="you@yourschool.edu" aria-label="Your email address" style="flex: 1 1 220px; background: #362619; border: 1px solid #5A4838; color: #F4ECE0; font-family: 'Barlow', sans-serif; font-size: 16px; padding: 13px 14px; box-sizing: border-box;">
-          <button id="email-submit" class="ghost" style="background: none; border: 1px solid #1F5E58; color: #1F5E58; font-family: 'Archivo', sans-serif; font-weight: 700; font-size: 15px; padding: 13px 20px; cursor: pointer;">Email me instead</button>
-        </div>
+        <form id="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" style="display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; width: 100%; max-width: 440px;">
+          <input type="hidden" name="form-name" value="contact">
+          <p hidden><label>Leave this empty if you are human: <input name="bot-field"></label></p>
+          <input id="in-email" name="email" type="email" placeholder="you@yourschool.edu" aria-label="Your email address" style="flex: 1 1 220px; background: #362619; border: 1px solid #5A4838; color: #F4ECE0; font-family: 'Barlow', sans-serif; font-size: 16px; padding: 13px 14px; box-sizing: border-box;">
+          <button id="email-submit" type="submit" class="ghost" style="background: none; border: 1px solid #1F5E58; color: #1F5E58; font-family: 'Archivo', sans-serif; font-weight: 700; font-size: 15px; padding: 13px 20px; cursor: pointer;">Email me instead</button>
+        </form>
         <div id="email-note" style="font-size: 14px; color: #A8967F; display: none;"></div>
       </div>
     </div>

@@ -110,18 +110,44 @@
     if (range) range.addEventListener("input", function (e) { setField(key, e.target.value); });
   });
 
-  // Email fallback capture (placeholder — wire to a real handler before launch).
+  // Email fallback capture via Netlify Forms.
+  // Submits over AJAX so the visitor stays on the page and sees the inline note.
+  var emailForm = document.getElementById("contact-form");
   var emailInput = document.getElementById("in-email");
   var emailBtn = document.getElementById("email-submit");
   var emailNote = document.getElementById("email-note");
 
-  if (emailBtn) {
-    emailBtn.addEventListener("click", function () {
-      var ok = /.+@.+\..+/.test(emailInput.value);
-      emailNote.textContent = ok
-        ? "Thanks. The quickest way to reach me is directly at hello@coffeeandlaptopconsulting.com."
-        : "Enter a valid email address first.";
-      emailNote.style.display = "block";
+  function showNote(msg) {
+    emailNote.textContent = msg;
+    emailNote.style.display = "block";
+  }
+
+  if (emailForm) {
+    emailForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      if (!/.+@.+\..+/.test(emailInput.value)) {
+        showNote("Enter a valid email address first.");
+        return;
+      }
+      emailBtn.disabled = true;
+      showNote("Sending...");
+      var body = new URLSearchParams(new FormData(emailForm)).toString();
+      fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: body
+      }).then(function (res) {
+        if (res.ok) {
+          emailForm.reset();
+          showNote("Thanks, I have your email and will be in touch. Prefer to reach me now? hello@coffeeandlaptopconsulting.com");
+        } else {
+          showNote("Something went wrong. Please email me directly at hello@coffeeandlaptopconsulting.com.");
+        }
+      }).catch(function () {
+        showNote("Something went wrong. Please email me directly at hello@coffeeandlaptopconsulting.com.");
+      }).finally(function () {
+        emailBtn.disabled = false;
+      });
     });
   }
   if (emailInput) {
