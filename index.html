@@ -132,12 +132,23 @@
             <span style="font-size: 13px; color: #9A876F;">Past leads who inquired but never enrolled. You already paid for them.</span>
           </div>
 
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px;">
+              <label for="in-recovery" style="font-weight: 600; font-size: 16px; color: #F4ECE0;">Estimated recovery rate</label>
+              <input id="in-recovery" type="number" min="5" max="20" step="1" value="10" data-field="recovery" aria-label="Estimated recovery rate in percent" style="width: 96px; background: #2A1E17; border: 1px solid #5A4838; color: #F4ECE0; font-family: 'Barlow', sans-serif; font-weight: 600; font-size: 16px; padding: 6px 8px; text-align: right;">
+            </div>
+            <input type="range" min="5" max="20" step="1" value="10" data-range="recovery" aria-label="Estimated recovery rate slider" style="width: 100%; accent-color: #1F5E58; margin: 0;">
+            <span style="font-size: 13px; color: #9A876F;">A conservative estimate of the additional enrollments you could recover from inquiries you already have. Adjust to see your own range. Actual results depend on your current process.</span>
+          </div>
+
           <details style="border-top: 1px solid #4A3A2E; padding-top: 16px;">
             <summary style="cursor: pointer; font-weight: 600; font-size: 14px; color: #A8967F; list-style: none; display: flex; align-items: center; gap: 8px;">
               <span style="color: #F4ECE0; font-size: 12px;">▸</span> How this is calculated
             </summary>
             <div style="margin-top: 12px; font-size: 14px; line-height: 1.65; color: #9A876F;">
-              Two fixed assumptions, both conservative estimates. First, faster and more persistent follow-up lifts your start rate by <span style="color: #F4ECE0; font-weight: 600;">+3 percentage points on your start rate</span>. Second, <span style="color: #F4ECE0; font-weight: 600;">2%</span> of your dormant list can be reactivated into enrollments. Ongoing recovery is inquiries per month, times 12, times the lift, times tuition. The one-time figure is your dormant list, times the reactivation rate, times tuition. No compounding, no upside scenarios.
+              These numbers are estimates based on the figures you enter and a conservative recovery rate you control. They are illustrative, not a guarantee. Actual results depend on your current follow-up, your admissions process, and program fit. The recovery rate is the one assumption here, and it is yours to set.
+              <br><br>
+              On the follow-up premise: most businesses take about 42 hours to respond to a new inquiry, and faster, more persistent follow-up substantially improves contact and qualification rates. Source: MIT/InsideSales Lead Response Management Study (2007) and the Harvard Business Review follow-up (2011).
             </div>
           </details>
         </div>
@@ -145,22 +156,32 @@
         <!-- Results -->
         <div style="flex: 1 1 340px; display: flex; flex-direction: column; gap: 0; background: #FBF7F0; border: 1px solid #E4D8C6; padding: clamp(22px, 3vw, 32px); box-sizing: border-box;">
           <div style="padding-bottom: 20px; border-bottom: 1px solid #E4D8C6;">
-            <div style="font-size: 14px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #6B5C4E;">Recovered revenue per year, ongoing</div>
-            <div id="r-ongoing" style="margin-top: 6px; font-family: 'Archivo', sans-serif; font-weight: 800; font-size: clamp(28px, 3.5vw, 38px); color: #2A1E17;">$216,000</div>
-            <div style="font-size: 13px; color: #9C8B79;">From lifting your start rate with faster follow-up.</div>
+            <div style="font-size: 14px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #6B5C4E;">Potential tuition from your inquiries, per year</div>
+            <div id="r-inquiryvalue" style="margin-top: 6px; font-family: 'Archivo', sans-serif; font-weight: 800; font-size: clamp(28px, 3.5vw, 38px); color: #2A1E17;">—</div>
+            <div style="font-size: 13px; color: #9C8B79;">Pure math on your inputs: inquiries times 12 times tuition. This is the pool you pay to generate, not what is capturable.</div>
           </div>
           <div style="padding: 20px 0; border-bottom: 1px solid #E4D8C6;">
-            <div style="font-size: 14px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #6B5C4E;">One-time, from reviving your dead list</div>
-            <div id="r-onetime" style="margin-top: 6px; font-family: 'Archivo', sans-serif; font-weight: 800; font-size: clamp(28px, 3.5vw, 38px); color: #2A1E17;">$150,000</div>
-            <div style="font-size: 13px; color: #9C8B79;">From reactivating dormant inquiries you already paid for.</div>
+            <div style="font-size: 14px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #6B5C4E;">What you currently enroll, per year</div>
+            <div id="r-current" style="margin-top: 6px; font-family: 'Archivo', sans-serif; font-weight: 800; font-size: clamp(24px, 3vw, 32px); color: #2A1E17;">—</div>
+            <div style="font-size: 13px; color: #9C8B79;">Your current inquiry-to-start rate applied to that pool.</div>
+          </div>
+          <div style="padding: 20px 0; border-bottom: 1px solid #E4D8C6;">
+            <div style="font-size: 14px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #6B5C4E;">Estimated additional recoverable, per year</div>
+            <div id="r-ongoing" style="margin-top: 6px; font-family: 'Archivo', sans-serif; font-weight: 800; font-size: clamp(24px, 3vw, 32px); color: #2A1E17;">—</div>
+            <div style="font-size: 13px; color: #9C8B79;">From recovering an additional <span class="rate-live">10</span>% on top of your current enrollments.</div>
+          </div>
+          <div style="padding: 20px 0; border-bottom: 1px solid #E4D8C6;">
+            <div style="font-size: 14px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #6B5C4E;">One-time, from reviving your dormant list</div>
+            <div id="r-dormant" style="margin-top: 6px; font-family: 'Archivo', sans-serif; font-weight: 800; font-size: clamp(24px, 3vw, 32px); color: #2A1E17;">—</div>
+            <div style="font-size: 13px; color: #9C8B79;">The same <span class="rate-live">10</span>% applied to inquiries you already paid for.</div>
           </div>
           <div style="padding-top: 22px;">
-            <div style="font-size: 14px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #2A1E17;">Year-one recoverable total</div>
-            <div id="r-total" style="margin-top: 6px; font-family: 'Archivo', sans-serif; font-weight: 900; font-size: clamp(44px, 6vw, 62px); line-height: 1; color: #1F5E58;">$366,000</div>
+            <div style="font-size: 14px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #2A1E17;">Estimated year-one opportunity</div>
+            <div id="r-yearone" style="margin-top: 6px; font-family: 'Archivo', sans-serif; font-weight: 900; font-size: clamp(44px, 6vw, 62px); line-height: 1; color: #1F5E58;">—</div>
           </div>
-          <p style="margin: 24px 0 0; font-size: 16px; line-height: 1.6; color: #574A3E; text-wrap: pretty;">That is roughly <strong id="r-students" style="color: #2A1E17;">24 students</strong> you are losing each year. A single one is worth <strong id="r-tuition" style="color: #2A1E17;">$15,000</strong>. Recovering even a few pays for the whole engagement.</p>
+          <p style="margin: 24px 0 0; font-size: 16px; line-height: 1.6; color: #574A3E; text-wrap: pretty;">Even recovering an additional <span class="rate-live">10</span>% could mean about <strong id="r-ongoing-inline" style="color: #2A1E17;">—</strong> per year, plus a one-time <strong id="r-dormant-inline" style="color: #2A1E17;">—</strong> from reviving your existing list. That is roughly <strong id="r-starts" style="color: #2A1E17;">—</strong> students. A single one is worth <strong id="r-tuition" style="color: #2A1E17;">—</strong>. Recovering even a few pays for the whole engagement.</p>
           <a href="#book" class="cta" style="display: block; text-align: center; margin-top: 24px; background: #1F5E58; color: #FBF7F0; font-family: 'Archivo', sans-serif; font-weight: 700; font-size: 17px; padding: 16px 28px;">Show me how to capture this</a>
-          <div style="margin-top: 16px; font-size: 12.5px; color: #9C8B79; text-align: center;">Estimates only. Conservative assumptions, shown above. Nothing you enter is stored.</div>
+          <div style="margin-top: 16px; font-size: 12.5px; color: #9C8B79; text-align: center;">Estimates based on your inputs and a recovery rate you control. Illustrative, not a guarantee. Nothing you enter is stored.</div>
         </div>
       </div>
     </div>

@@ -1,25 +1,21 @@
-// Coffee and Laptop — Dormant Revenue Calculator
-// Ported from the Claude Design component. All state is in memory; nothing is stored.
+// C+L Systems — Dormant Revenue Calculator ("The CALC")
+// Pure client-side, in-memory. No storage, no backend.
+// Every displayed figure is computed live from the user's own inputs plus a
+// single visible, user-controlled recovery rate. There are no hidden assumptions.
 
 (function () {
   "use strict";
 
-  // Fixed, conservative assumptions (were editable props in the design).
-  var LIFT_POINTS = 3;        // start-rate lift from faster follow-up, in percentage points
-  var REACTIVATION_RATE = 2;  // % of the dormant list that can be reactivated
-
-  var lift = LIFT_POINTS / 100;
-  var react = REACTIVATION_RATE / 100;
-
   // Input state (defaults match the markup).
-  var state = { tuition: 15000, inquiries: 40, rate: 8, dormant: 500 };
+  var state = { tuition: 15000, inquiries: 40, rate: 8, dormant: 500, recovery: 10 };
 
-  // Clamp bounds per field (min/max used when coercing input).
+  // Clamp bounds per field [min, max].
   var bounds = {
     tuition: [1000, 80000],
     inquiries: [1, 1000],
     rate: [1, 50],
-    dormant: [0, 20000]
+    dormant: [0, 20000],
+    recovery: [5, 20]
   };
 
   var usd = new Intl.NumberFormat("en-US", {
@@ -28,44 +24,68 @@
     maximumFractionDigits: 0
   });
 
-  // Compute target figures from current inputs.
-  // Note: matches the design exactly — the "current rate" input is collected
-  // for context but does not feed the recovery math.
+  // All math is pure arithmetic on the inputs.
+  //   T = tuition, M = inquiries/mo, S = start rate (decimal),
+  //   D = dormant inquiries, R = recovery rate (decimal, user-controlled)
   function targets() {
-    var t = state.tuition, inq = state.inquiries, dorm = state.dormant;
-    var ongoing = inq * 12 * lift * t;
-    var onetime = dorm * react * t;
+    var T = state.tuition, M = state.inquiries, D = state.dormant;
+    var S = state.rate / 100, R = state.recovery / 100;
+
+    var annualInquiryValue = M * 12 * T;              // the pool (pure math)
+    var currentEnrollmentRevenue = M * 12 * S * T;    // context (pure math)
+    var recoverableOngoing = M * 12 * S * R * T;      // user-controlled slice
+    var recoverableDormant = D * S * R * T;           // one-time, user-controlled
+
     return {
-      ongoing: ongoing,
-      onetime: onetime,
-      total: ongoing + onetime,
-      students: inq * 12 * lift + dorm * react
+      annualInquiryValue: annualInquiryValue,
+      currentEnrollmentRevenue: currentEnrollmentRevenue,
+      recoverableOngoing: recoverableOngoing,
+      recoverableDormant: recoverableDormant,
+      yearOneOpportunity: recoverableOngoing + recoverableDormant,
+      recoverableStarts: (M * 12 * S * R) + (D * S * R)
     };
   }
 
-  // DOM handles for the animated result figures.
-  var out = {
+  var el = {
+    inquiryvalue: document.getElementById("r-inquiryvalue"),
+    current: document.getElementById("r-current"),
     ongoing: document.getElementById("r-ongoing"),
-    onetime: document.getElementById("r-onetime"),
-    total: document.getElementById("r-total"),
-    students: document.getElementById("r-students"),
+    dormant: document.getElementById("r-dormant"),
+    yearone: document.getElementById("r-yearone"),
+    ongoingInline: document.getElementById("r-ongoing-inline"),
+    dormantInline: document.getElementById("r-dormant-inline"),
+    starts: document.getElementById("r-starts"),
     tuition: document.getElementById("r-tuition")
   };
+  var rateSpans = document.querySelectorAll(".rate-live");
 
   var disp = targets(); // currently displayed (animated) values
   var raf = null;
 
   function paint(d) {
-    out.ongoing.textContent = usd.format(Math.round(d.ongoing));
-    out.onetime.textContent = usd.format(Math.round(d.onetime));
-    out.total.textContent = usd.format(Math.round(d.total));
-    out.students.textContent = String(Math.round(d.students)) + " students";
-    out.tuition.textContent = usd.format(state.tuition);
+    el.inquiryvalue.textContent = usd.format(Math.round(d.annualInquiryValue));
+    el.current.textContent = usd.format(Math.round(d.currentEnrollmentRevenue));
+    el.ongoing.textContent = usd.format(Math.round(d.recoverableOngoing));
+    el.dormant.textContent = usd.format(Math.round(d.recoverableDormant));
+    el.yearone.textContent = usd.format(Math.round(d.yearOneOpportunity));
+    el.ongoingInline.textContent = usd.format(Math.round(d.recoverableOngoing));
+    el.dormantInline.textContent = usd.format(Math.round(d.recoverableDormant));
+    el.starts.textContent = d.recoverableStarts.toFixed(1);
+    el.tuition.textContent = usd.format(state.tuition);
+    // Live recovery-rate readout in the surrounding copy.
+    for (var i = 0; i < rateSpans.length; i++) rateSpans[i].textContent = state.recovery;
   }
 
   // Ease from the current displayed values toward the new targets over 500ms.
   function animate() {
-    var from = { ongoing: disp.ongoing, onetime: disp.onetime, total: disp.total, students: disp.students };
+    var from = {
+      annualInquiryValue: disp.annualInquiryValue,
+      currentEnrollmentRevenue: disp.currentEnrollmentRevenue,
+      recoverableOngoing: disp.recoverableOngoing,
+      recoverableDormant: disp.recoverableDormant,
+      yearOneOpportunity: disp.yearOneOpportunity,
+      recoverableStarts: disp.recoverableStarts
+    };
     var to = targets();
     var t0 = performance.now();
     var dur = 500;
@@ -75,10 +95,12 @@
       var p = Math.min(1, (now - t0) / dur);
       var e = 1 - Math.pow(1 - p, 3); // cubic ease-out
       disp = {
-        ongoing: from.ongoing + (to.ongoing - from.ongoing) * e,
-        onetime: from.onetime + (to.onetime - from.onetime) * e,
-        total: from.total + (to.total - from.total) * e,
-        students: from.students + (to.students - from.students) * e
+        annualInquiryValue: from.annualInquiryValue + (to.annualInquiryValue - from.annualInquiryValue) * e,
+        currentEnrollmentRevenue: from.currentEnrollmentRevenue + (to.currentEnrollmentRevenue - from.currentEnrollmentRevenue) * e,
+        recoverableOngoing: from.recoverableOngoing + (to.recoverableOngoing - from.recoverableOngoing) * e,
+        recoverableDormant: from.recoverableDormant + (to.recoverableDormant - from.recoverableDormant) * e,
+        yearOneOpportunity: from.yearOneOpportunity + (to.yearOneOpportunity - from.yearOneOpportunity) * e,
+        recoverableStarts: from.recoverableStarts + (to.recoverableStarts - from.recoverableStarts) * e
       };
       paint(disp);
       if (p < 1) raf = requestAnimationFrame(step);
@@ -103,7 +125,7 @@
   }
 
   // Wire up every number field and slider by its data-field / data-range key.
-  ["tuition", "inquiries", "rate", "dormant"].forEach(function (key) {
+  ["tuition", "inquiries", "rate", "dormant", "recovery"].forEach(function (key) {
     var num = document.querySelector('[data-field="' + key + '"]');
     var range = document.querySelector('[data-range="' + key + '"]');
     if (num) num.addEventListener("input", function (e) { setField(key, e.target.value); });
@@ -157,6 +179,6 @@
     });
   }
 
-  // Paint initial figures.
+  // Paint initial figures from live inputs.
   paint(disp);
 })();
