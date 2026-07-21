@@ -1,8 +1,10 @@
-# Coffee and Laptop
+# C+L Systems
 
-Single-page marketing site for Coffee and Laptop — a solo consultancy that recovers
-lost enrollment revenue for private career and trade schools. The centerpiece is an
-interactive **Dormant Revenue Calculator**.
+Single-page marketing site for **C+L Systems** (full name: Coffee and Laptop), a solo
+practice that recovers lost enrollment revenue for private career and trade schools.
+The centerpiece is an interactive **Dormant Revenue Calculator**.
+
+Domain: candlsystems.com. Contact: hello@candlsystems.com.
 
 Imported from the Claude Design project "C+L website design brief" and converted from
 the `.dc.html` design-canvas format into a self-contained static page (no runtime,

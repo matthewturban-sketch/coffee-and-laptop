@@ -139,12 +139,12 @@
       }).then(function (res) {
         if (res.ok) {
           emailForm.reset();
-          showNote("Thanks, I have your email and will be in touch. Prefer to reach me now? hello@coffeeandlaptopconsulting.com");
+          showNote("Thanks, I have your email and will be in touch. Prefer to reach me now? hello@candlsystems.com");
         } else {
-          showNote("Something went wrong. Please email me directly at hello@coffeeandlaptopconsulting.com.");
+          showNote("Something went wrong. Please email me directly at hello@candlsystems.com.");
         }
       }).catch(function () {
-        showNote("Something went wrong. Please email me directly at hello@coffeeandlaptopconsulting.com.");
+        showNote("Something went wrong. Please email me directly at hello@candlsystems.com.");
       }).finally(function () {
         emailBtn.disabled = false;
       });
