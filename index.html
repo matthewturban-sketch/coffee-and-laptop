@@ -135,10 +135,10 @@
           <div style="display: flex; flex-direction: column; gap: 8px;">
             <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px;">
               <label for="in-recovery" style="font-weight: 600; font-size: 16px; color: #F4ECE0;">Estimated recovery rate</label>
-              <input id="in-recovery" type="number" min="0" max="20" step="1" value="10" data-field="recovery" aria-label="Estimated recovery rate in percent" style="width: 96px; background: #2A1E17; border: 1px solid #5A4838; color: #F4ECE0; font-family: 'Barlow', sans-serif; font-weight: 600; font-size: 16px; padding: 6px 8px; text-align: right;">
+              <input id="in-recovery" type="number" min="1" max="10" step="1" value="3" data-field="recovery" aria-label="Estimated recovery rate in percent" style="width: 96px; background: #2A1E17; border: 1px solid #5A4838; color: #F4ECE0; font-family: 'Barlow', sans-serif; font-weight: 600; font-size: 16px; padding: 6px 8px; text-align: right;">
             </div>
-            <input type="range" min="0" max="20" step="1" value="10" data-range="recovery" aria-label="Estimated recovery rate slider" style="width: 100%; accent-color: #1F5E58; margin: 0;">
-            <span style="font-size: 13px; color: #9A876F;">A conservative estimate of the additional enrollments you could recover from inquiries you already have. Adjust to see your own range. Actual results depend on your current process.</span>
+            <input type="range" min="1" max="10" step="1" value="3" data-range="recovery" aria-label="Estimated recovery rate slider" style="width: 100%; accent-color: #1F5E58; margin: 0;">
+            <span style="font-size: 13px; color: #9A876F;">A conservative estimate of how many of your currently-lost inquiries you could recover with better follow-up. Adjust to see your own range. Actual results depend on your current process.</span>
           </div>
 
           <details style="border-top: 1px solid #4A3A2E; padding-top: 16px;">
@@ -168,18 +168,18 @@
           <div style="padding: 20px 0; border-bottom: 1px solid #E4D8C6;">
             <div style="font-size: 14px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #6B5C4E;">Estimated additional recoverable, per year</div>
             <div id="r-ongoing" style="margin-top: 6px; font-family: 'Archivo', sans-serif; font-weight: 800; font-size: clamp(24px, 3vw, 32px); color: #2A1E17;">—</div>
-            <div style="font-size: 13px; color: #9C8B79;">From recovering an additional <span class="rate-live">10</span>% on top of your current enrollments.</div>
+            <div style="font-size: 13px; color: #9C8B79;">From recovering <span class="rate-live">3</span>% of the inquiries that currently slip away.</div>
           </div>
           <div style="padding: 20px 0; border-bottom: 1px solid #E4D8C6;">
             <div style="font-size: 14px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #6B5C4E;">One-time, from reviving your dormant list</div>
             <div id="r-dormant" style="margin-top: 6px; font-family: 'Archivo', sans-serif; font-weight: 800; font-size: clamp(24px, 3vw, 32px); color: #2A1E17;">—</div>
-            <div style="font-size: 13px; color: #9C8B79;">The same <span class="rate-live">10</span>% applied to inquiries you already paid for.</div>
+            <div style="font-size: 13px; color: #9C8B79;">Recovering <span class="rate-live">3</span>% of the dormant inquiries you already paid for.</div>
           </div>
           <div style="padding-top: 22px;">
             <div style="font-size: 14px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #2A1E17;">Estimated year-one opportunity</div>
             <div id="r-yearone" style="margin-top: 6px; font-family: 'Archivo', sans-serif; font-weight: 900; font-size: clamp(44px, 6vw, 62px); line-height: 1; color: #1F5E58;">—</div>
           </div>
-          <p style="margin: 24px 0 0; font-size: 16px; line-height: 1.6; color: #574A3E; text-wrap: pretty;">Even recovering an additional <span class="rate-live">10</span>% could mean about <strong id="r-ongoing-inline" style="color: #2A1E17;">—</strong> per year, plus a one-time <strong id="r-dormant-inline" style="color: #2A1E17;">—</strong> from reviving your existing list. That is roughly <strong id="r-starts" style="color: #2A1E17;">—</strong> students. A single one is worth <strong id="r-tuition" style="color: #2A1E17;">—</strong>. Recovering even a few makes a meaningful difference.</p>
+          <p style="margin: 24px 0 0; font-size: 16px; line-height: 1.6; color: #574A3E; text-wrap: pretty;">Even recovering <span class="rate-live">3</span>% of the leads that currently slip away could mean about <strong id="r-ongoing-inline" style="color: #2A1E17;">—</strong> per year, plus a one-time <strong id="r-dormant-inline" style="color: #2A1E17;">—</strong> from reviving your existing list. That is roughly <strong id="r-starts" style="color: #2A1E17;">—</strong> students. A single one is worth <strong id="r-tuition" style="color: #2A1E17;">—</strong>. Recovering even a few makes a meaningful difference.</p>
           <a href="#book" class="cta" style="display: block; text-align: center; margin-top: 24px; background: #1F5E58; color: #FBF7F0; font-family: 'Archivo', sans-serif; font-weight: 700; font-size: 17px; padding: 16px 28px;">Reach out to discuss how to capture this</a>
           <div style="margin-top: 16px; font-size: 12.5px; color: #9C8B79; text-align: center;">Based on your current conversion rates + estimated up-side. Nothing you enter is stored.</div>
         </div>

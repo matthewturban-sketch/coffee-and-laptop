@@ -7,7 +7,7 @@
   "use strict";
 
   // Input state (defaults match the markup).
-  var state = { tuition: 6000, inquiries: 200, rate: 8, dormant: 1000, recovery: 10 };
+  var state = { tuition: 6000, inquiries: 200, rate: 8, dormant: 1000, recovery: 3 };
 
   // Clamp bounds per field [min, max].
   var bounds = {
@@ -15,7 +15,7 @@
     inquiries: [50, 1000],
     rate: [1, 50],
     dormant: [100, 10000],
-    recovery: [0, 20]
+    recovery: [1, 10]
   };
 
   var usd = new Intl.NumberFormat("en-US", {
@@ -31,10 +31,12 @@
     var T = state.tuition, M = state.inquiries, D = state.dormant;
     var S = state.rate / 100, R = state.recovery / 100;
 
-    var annualInquiryValue = M * 12 * T;              // the pool (pure math)
-    var currentEnrollmentRevenue = M * 12 * S * T;    // context (pure math)
-    var recoverableOngoing = M * 12 * S * R * T;      // user-controlled slice
-    var recoverableDormant = D * S * R * T;           // one-time, user-controlled
+    var annualInquiryValue = M * 12 * T;                 // the pool (pure math)
+    var currentEnrollmentRevenue = M * 12 * S * T;       // context (pure math)
+    // Recovery comes from the leads you are NOT currently enrolling: the (1 - S) slice.
+    // As the start rate rises, headroom shrinks; at 100% there is nothing left to recover.
+    var recoverableOngoing = M * 12 * (1 - S) * R * T;   // user-controlled slice of the leaked pool
+    var recoverableDormant = D * R * T;                  // one-time; dormant are all non-enrolled already
 
     return {
       annualInquiryValue: annualInquiryValue,
@@ -42,7 +44,7 @@
       recoverableOngoing: recoverableOngoing,
       recoverableDormant: recoverableDormant,
       yearOneOpportunity: recoverableOngoing + recoverableDormant,
-      recoverableStarts: (M * 12 * S * R) + (D * S * R)
+      recoverableStarts: (M * 12 * (1 - S) * R) + (D * R)
     };
   }
 
