@@ -7,15 +7,15 @@
   "use strict";
 
   // Input state (defaults match the markup).
-  var state = { tuition: 15000, inquiries: 40, rate: 8, dormant: 500, recovery: 10 };
+  var state = { tuition: 6000, inquiries: 200, rate: 8, dormant: 1000, recovery: 10 };
 
   // Clamp bounds per field [min, max].
   var bounds = {
-    tuition: [1000, 80000],
-    inquiries: [1, 1000],
+    tuition: [1000, 25000],
+    inquiries: [50, 1000],
     rate: [1, 50],
-    dormant: [0, 20000],
-    recovery: [5, 20]
+    dormant: [100, 10000],
+    recovery: [0, 20]
   };
 
   var usd = new Intl.NumberFormat("en-US", {

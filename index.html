@@ -99,18 +99,18 @@
           <div style="display: flex; flex-direction: column; gap: 8px;">
             <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px;">
               <label for="in-tuition" style="font-weight: 600; font-size: 16px; color: #F4ECE0;">Your avg program tuition</label>
-              <input id="in-tuition" type="number" min="1000" max="80000" step="500" value="15000" data-field="tuition" aria-label="Average program tuition in dollars" style="width: 96px; background: #2A1E17; border: 1px solid #5A4838; color: #F4ECE0; font-family: 'Barlow', sans-serif; font-weight: 600; font-size: 16px; padding: 6px 8px; text-align: right;">
+              <input id="in-tuition" type="number" min="1000" max="25000" step="500" value="6000" data-field="tuition" aria-label="Average program tuition in dollars" style="width: 96px; background: #2A1E17; border: 1px solid #5A4838; color: #F4ECE0; font-family: 'Barlow', sans-serif; font-weight: 600; font-size: 16px; padding: 6px 8px; text-align: right;">
             </div>
-            <input type="range" min="1000" max="60000" step="500" value="15000" data-range="tuition" aria-label="Average program tuition slider" style="width: 100%; accent-color: #1F5E58; margin: 0;">
+            <input type="range" min="1000" max="25000" step="500" value="6000" data-range="tuition" aria-label="Average program tuition slider" style="width: 100%; accent-color: #1F5E58; margin: 0;">
             <span style="font-size: 13px; color: #9A876F;">Revenue from each enrolled student.</span>
           </div>
 
           <div style="display: flex; flex-direction: column; gap: 8px;">
             <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px;">
               <label for="in-inquiries" style="font-weight: 600; font-size: 16px; color: #F4ECE0;">New inquiries per month</label>
-              <input id="in-inquiries" type="number" min="1" max="1000" step="1" value="40" data-field="inquiries" aria-label="New inquiries per month" style="width: 96px; background: #2A1E17; border: 1px solid #5A4838; color: #F4ECE0; font-family: 'Barlow', sans-serif; font-weight: 600; font-size: 16px; padding: 6px 8px; text-align: right;">
+              <input id="in-inquiries" type="number" min="50" max="1000" step="1" value="200" data-field="inquiries" aria-label="New inquiries per month" style="width: 96px; background: #2A1E17; border: 1px solid #5A4838; color: #F4ECE0; font-family: 'Barlow', sans-serif; font-weight: 600; font-size: 16px; padding: 6px 8px; text-align: right;">
             </div>
-            <input type="range" min="5" max="300" step="1" value="40" data-range="inquiries" aria-label="New inquiries per month slider" style="width: 100%; accent-color: #1F5E58; margin: 0;">
+            <input type="range" min="50" max="1000" step="1" value="200" data-range="inquiries" aria-label="New inquiries per month slider" style="width: 100%; accent-color: #1F5E58; margin: 0;">
             <span style="font-size: 13px; color: #9A876F;">Leads from your website, ads, and walk-ins combined.</span>
           </div>
 
@@ -119,25 +119,25 @@
               <label for="in-rate" style="font-weight: 600; font-size: 16px; color: #F4ECE0;">Current inquiry-to-start rate</label>
               <input id="in-rate" type="number" min="1" max="50" step="1" value="8" data-field="rate" aria-label="Current inquiry to start rate in percent" style="width: 96px; background: #2A1E17; border: 1px solid #5A4838; color: #F4ECE0; font-family: 'Barlow', sans-serif; font-weight: 600; font-size: 16px; padding: 6px 8px; text-align: right;">
             </div>
-            <input type="range" min="1" max="30" step="1" value="8" data-range="rate" aria-label="Current inquiry to start rate slider" style="width: 100%; accent-color: #1F5E58; margin: 0;">
+            <input type="range" min="1" max="50" step="1" value="8" data-range="rate" aria-label="Current inquiry to start rate slider" style="width: 100%; accent-color: #1F5E58; margin: 0;">
             <span style="font-size: 13px; color: #9A876F;">Percent of inquiries that become enrolled students. Not sure? 8% is typical.</span>
           </div>
 
           <div style="display: flex; flex-direction: column; gap: 8px;">
             <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px;">
               <label for="in-dormant" style="font-weight: 600; font-size: 16px; color: #F4ECE0;">Dormant inquiries in your CRM</label>
-              <input id="in-dormant" type="number" min="0" max="20000" step="10" value="500" data-field="dormant" aria-label="Dormant inquiries sitting in your CRM" style="width: 96px; background: #2A1E17; border: 1px solid #5A4838; color: #F4ECE0; font-family: 'Barlow', sans-serif; font-weight: 600; font-size: 16px; padding: 6px 8px; text-align: right;">
+              <input id="in-dormant" type="number" min="100" max="10000" step="10" value="1000" data-field="dormant" aria-label="Dormant inquiries sitting in your CRM" style="width: 96px; background: #2A1E17; border: 1px solid #5A4838; color: #F4ECE0; font-family: 'Barlow', sans-serif; font-weight: 600; font-size: 16px; padding: 6px 8px; text-align: right;">
             </div>
-            <input type="range" min="0" max="5000" step="10" value="500" data-range="dormant" aria-label="Dormant inquiries slider" style="width: 100%; accent-color: #1F5E58; margin: 0;">
+            <input type="range" min="100" max="10000" step="10" value="1000" data-range="dormant" aria-label="Dormant inquiries slider" style="width: 100%; accent-color: #1F5E58; margin: 0;">
             <span style="font-size: 13px; color: #9A876F;">Past leads who inquired but never enrolled. You already paid for them.</span>
           </div>
 
           <div style="display: flex; flex-direction: column; gap: 8px;">
             <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px;">
               <label for="in-recovery" style="font-weight: 600; font-size: 16px; color: #F4ECE0;">Estimated recovery rate</label>
-              <input id="in-recovery" type="number" min="5" max="20" step="1" value="10" data-field="recovery" aria-label="Estimated recovery rate in percent" style="width: 96px; background: #2A1E17; border: 1px solid #5A4838; color: #F4ECE0; font-family: 'Barlow', sans-serif; font-weight: 600; font-size: 16px; padding: 6px 8px; text-align: right;">
+              <input id="in-recovery" type="number" min="0" max="20" step="1" value="10" data-field="recovery" aria-label="Estimated recovery rate in percent" style="width: 96px; background: #2A1E17; border: 1px solid #5A4838; color: #F4ECE0; font-family: 'Barlow', sans-serif; font-weight: 600; font-size: 16px; padding: 6px 8px; text-align: right;">
             </div>
-            <input type="range" min="5" max="20" step="1" value="10" data-range="recovery" aria-label="Estimated recovery rate slider" style="width: 100%; accent-color: #1F5E58; margin: 0;">
+            <input type="range" min="0" max="20" step="1" value="10" data-range="recovery" aria-label="Estimated recovery rate slider" style="width: 100%; accent-color: #1F5E58; margin: 0;">
             <span style="font-size: 13px; color: #9A876F;">A conservative estimate of the additional enrollments you could recover from inquiries you already have. Adjust to see your own range. Actual results depend on your current process.</span>
           </div>
 
