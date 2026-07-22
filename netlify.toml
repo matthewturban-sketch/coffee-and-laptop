@@ -5,6 +5,23 @@
   publish = "."
   command = ""
 
+# --- Domain canonicalization ---
+# Force the old domain (both apex and www) to 301-redirect to the primary
+# candlsystems.com site. Netlify's primary-domain setting does not reliably
+# redirect the BARE APEX of a secondary domain, so we do it explicitly here.
+# (The old domain must stay attached in Domain management for these to fire.)
+[[redirects]]
+  from = "https://coffeeandlaptopconsulting.com/*"
+  to = "https://www.candlsystems.com/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://www.coffeeandlaptopconsulting.com/*"
+  to = "https://www.candlsystems.com/:splat"
+  status = 301
+  force = true
+
 # Security + caching headers
 [[headers]]
   for = "/*"
